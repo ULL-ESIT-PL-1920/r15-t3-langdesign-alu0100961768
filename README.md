@@ -22,11 +22,13 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
               "if" <parenthesis> <block> ("else" "if" <block>)* ('else' <block>)? |
               "while" <parenthesis> <block> |
               'function' <word> '(' <word> (',' <word>)* ')' <block> |
-              <expr> ";"
+              <asign> ";"
               
-<declaration> ::= 'var' WORD ('=' <expr>)?
+<declaration> ::= 'var' WORD ('=' <asign>)?   #Hundir el arbol a derechas en vez de a izquierdas en este caso.
 
-<expr> ::= <term> (('==', '!=', '>', '>=', '<', '<=', '=') <term>)*
+<asign> ::= <expr> ('=' <expr>)*
+
+<expr> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
 
 <term> ::= <sum> (('+', '-') <sum>)*
 
@@ -53,4 +55,6 @@ NUMBER = ([-+]?\d+     #entero
           (\.\d+)?    #flotante
           ([eE][-+]?\d+)?  #con exponente
           )
+          
+LEFTVALUE = 
 ```
