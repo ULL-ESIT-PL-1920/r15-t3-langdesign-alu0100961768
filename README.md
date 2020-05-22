@@ -24,23 +24,27 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
               'function' <word> '(' <word> (',' <word>)* ')' <block> |
               <asign> ";"
               
-<declaration> ::= 'var' WORD ('=' <asign>)?   #Hundir el arbol a derechas en vez de a izquierdas en este caso.
+<declaration> ::= 'var' WORD ('=' <expr>)?   #Hundir el arbol a derechas en vez de a izquierdas en este caso.
 
-<asign> ::= <expr> ('=' <expr>)*
+<expr> ::= (<leftval> '=')* <comp>
 
-<expr> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
+<leftVal> ::= WORD ('.' WORD | '[' <expr> ']')*
+
+<comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
 
 <term> ::= <sum> (('+', '-') <sum>)*
 
 <sum> ::= <fact> (('*', '/') <fact>)*
 
-<fact> ::= <value> | <word> <apply> | <parenthesis> | <array> // Added by: Casiano
+<fact> ::= ( VALUE | WORD | <array> | <parenthesis> ) ('.' WORD | '[' <expr> ']' | <apply> )*
 
 <apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'<word><apply> | empty
 
 <array> ::= '[' ']' | '[' <expr> (',' <expr> )*] // Added by Casiano
 
 <parenthesis> ::= '(' <expr> ')'
+
+
 ```
 
 ## Tokens
@@ -56,5 +60,4 @@ NUMBER = ([-+]?\d+     #entero
           ([eE][-+]?\d+)?  #con exponente
           )
           
-LEFTVALUE = 
 ```
