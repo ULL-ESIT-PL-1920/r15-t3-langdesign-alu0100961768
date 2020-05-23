@@ -24,11 +24,11 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
               'function' <word> '(' <word> (',' <word>)* ')' <block> |
               <asign> ";"
               
-<declaration> ::= 'var' WORD ('=' <expr>)?   #Hundir el arbol a derechas en vez de a izquierdas en este caso.
+<declaration> ::= 'var' WORD ('=' <asign>)?   #Hundir el arbol a derechas en vez de a izquierdas en este caso.
 
-<expr> ::= (<leftval> '=')* <comp>
+<asign> ::= (<leftval> '=')* <comp>
 
-<leftVal> ::= WORD ('.' WORD | '[' <expr> ']')*
+<leftVal> ::= WORD ('.' WORD | '[' <comp> ']')*
 
 <comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
 
